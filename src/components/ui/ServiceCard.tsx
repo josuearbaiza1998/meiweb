@@ -19,7 +19,6 @@ export default function ServiceCard({ image, title, description, time, location,
             transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
             className="relative flex flex-col bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden group"
         >
-            {/* Contenedor de la imagen con overflow oculto para el zoom */}
             <div className="overflow-hidden">
                 <img
                     className="w-full h-64 object-cover transform transition-transform duration-700 group-hover:scale-105"
