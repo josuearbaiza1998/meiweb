@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Pause, Play } from 'lucide-react';
 import imagen1 from '../../assets/images/imagen1.webp'
 import imagen2 from '../../assets/images/imagen2.webp'
 import imagen3 from '../../assets/images/imagen3.webp'
@@ -24,10 +23,8 @@ const SLIDE_DURATION = 6;
 
 export default function HeroSection() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const reducirMovimiento = useReducedMotion();
-    const [pausadoPorUsuario, setPausadoPorUsuario] = useState<boolean | null>(null);
-    // Si la persona pidió reducir movimiento, el carrusel empieza en pausa
-    const pausado = pausadoPorUsuario ?? !!reducirMovimiento;
+    // Las imágenes pasan solas, salvo que el sistema de la persona pida reducir movimiento
+    const pausado = !!useReducedMotion();
 
     useEffect(() => {
         if (pausado) return;
@@ -104,15 +101,6 @@ export default function HeroSection() {
                     </div>
                 </motion.div>
             </div>
-
-            <button
-                type="button"
-                onClick={() => setPausadoPorUsuario(!pausado)}
-                className="absolute bottom-24 right-6 md:right-12 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
-            >
-                {pausado ? <Play size={18} aria-hidden="true" /> : <Pause size={18} aria-hidden="true" />}
-                <span className="sr-only">{pausado ? 'Reanudar presentación de imágenes' : 'Pausar presentación de imágenes'}</span>
-            </button>
 
             <div className="absolute bottom-0 left-0 z-30 w-full overflow-hidden leading-none" aria-hidden="true">
                 <motion.svg

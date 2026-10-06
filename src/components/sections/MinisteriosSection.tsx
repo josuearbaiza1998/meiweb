@@ -37,8 +37,10 @@ export default function MinisteriosSection() {
                                 <span className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-mei-gold text-mei-night">
                                     <Icono size={28} aria-hidden="true" />
                                 </span>
-                                <h3 className="font-serif text-2xl font-bold mb-1">{ministerio.titulo}</h3>
-                                <p className="text-sm font-semibold text-mei-gold mb-4">{ministerio.lema}</p>
+                                <h3 className="font-serif text-2xl font-bold mb-2">{ministerio.titulo}</h3>
+                                {ministerio.lema && (
+                                    <p className="text-sm font-semibold text-mei-gold mb-4">{ministerio.lema}</p>
+                                )}
                                 <p className="text-base text-gray-200 leading-relaxed mb-6">{ministerio.descripcion}</p>
                                 <ul className="mt-auto space-y-2 text-sm text-gray-200">
                                     {ministerio.detalles.map((detalle) => (

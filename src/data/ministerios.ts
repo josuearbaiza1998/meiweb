@@ -5,15 +5,13 @@ export interface Ministerio {
     id: string;
     icono: LucideIcon;
     titulo: string;
-    lema: string;
+    lema?: string;
     descripcion: string;
     detalles: string[];
     enlace?: { texto: string; href: string };
 }
 
 // Textos de borrador: la iglesia puede ajustarlos libremente.
-// Las frecuencias de radio y el canal se tomaron del sitio anterior
-// (ministeriosemanuel.net); confirma que sigan vigentes.
 export const MINISTERIOS: Ministerio[] = [
     {
         id: 'escuela-dominical',
@@ -40,16 +38,15 @@ export const MINISTERIOS: Ministerio[] = [
         lema: 'La Palabra en cada hogar',
         descripcion:
             'A través de la radio llevamos alabanza, enseñanza y mensajes de esperanza a hogares de la zona oriental y a quienes no pueden asistir al templo.',
-        detalles: ['Radio Emanuel 1320 AM', 'Adoración FM 90.5', 'Programas de enseñanza y alabanza'],
+        detalles: ['Radio Emanuel 103.7 FM', 'Indicativo YSHC', 'Programas de enseñanza y alabanza'],
     },
     {
         id: 'canal',
         icono: Tv,
-        titulo: 'Canal',
-        lema: 'Iglesia sin fronteras',
+        titulo: 'MeiTV',
         descripcion:
             'Transmitimos nuestros servicios y programas para que puedas ser parte de la iglesia desde cualquier lugar del mundo.',
-        detalles: ['Canal 16', 'Servicios en vivo por YouTube', 'Mensajes disponibles en línea'],
+        detalles: ['Servicios en vivo por YouTube', 'Mensajes disponibles en línea'],
         enlace: { texto: 'Ver transmisiones en YouTube', href: IGLESIA.redes.youtube },
     },
 ];

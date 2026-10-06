@@ -1,5 +1,6 @@
 import AgendaSection from "../components/sections/AgendaSection"
 import ContactoSection from "../components/sections/ContactoSection"
+import EnVivoSection from "../components/sections/EnVivoSection"
 import HeroSection from "../components/sections/HeroSection"
 import MinisteriosSection from "../components/sections/MinisteriosSection"
 import NosotrosSection from "../components/sections/NosotrosSection"
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <HeroSection />
+      <EnVivoSection />
       <Servicios />
       <NosotrosSection />
       <AgendaSection />

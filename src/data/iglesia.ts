@@ -29,3 +29,18 @@ export const HORARIOS = [
     { dia: 'Jueves', nombre: 'Formación Bíblica', hora: '5:30 pm' },
     { dia: 'Domingo', nombre: 'Servicios Dominicales', hora: '6:00 am y 10:00 am' },
 ] as const;
+
+/**
+ * Canal de YouTube de la iglesia, usado por la sección de servicio en vivo.
+ * `canalId` es el identificador del canal (empieza con UC). Verifícalo si
+ * alguna vez cambia de canal.
+ */
+export const YOUTUBE = {
+    canalId: 'UC2-t8oaNCHmXIfGaqy8aLVA',
+    /**
+     * Clave de la API de YouTube. Se configura como variable de entorno
+     * VITE_YOUTUBE_API_KEY (en Vercel: Settings > Environment Variables).
+     * Sin clave, la sección de "en vivo" simplemente no aparece.
+     */
+    apiKey: import.meta.env.VITE_YOUTUBE_API_KEY as string | undefined,
+} as const;
