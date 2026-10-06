@@ -1,27 +1,42 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import type { AgendaEventos } from '../../data/eventos';
 
 const fadeUpVariant = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
 };
 
+const DIAS_SEMANA = [
+    { corto: 'D', largo: 'Domingo' },
+    { corto: 'L', largo: 'Lunes' },
+    { corto: 'M', largo: 'Martes' },
+    { corto: 'M', largo: 'Miércoles' },
+    { corto: 'J', largo: 'Jueves' },
+    { corto: 'V', largo: 'Viernes' },
+    { corto: 'S', largo: 'Sábado' },
+];
+
+const formatoFechaLarga = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const formatoMes = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' });
+
 interface CalendarioMEIProps {
-    eventos: Record<string, unknown>;
-    diaSeleccionado: string;
+    eventos: AgendaEventos;
+    diaSeleccionado: string | undefined;
     onSeleccionar: (clave: string) => void;
 }
 
 export default function CalendarioMEI({ eventos, diaSeleccionado, onSeleccionar }: CalendarioMEIProps) {
-    const fechaInicial = Object.keys(eventos).length > 0
-        ? new Date(Object.keys(eventos)[0] + 'T00:00:00')
-        : new Date();
-    const [fechaActual, setFechaActual] = useState(fechaInicial);
+    // Abre el calendario en el mes del día seleccionado (el próximo evento)
+    const [fechaActual, setFechaActual] = useState(() =>
+        diaSeleccionado ? new Date(diaSeleccionado + 'T00:00:00') : new Date()
+    );
 
     const año = fechaActual.getFullYear();
     const mes = fechaActual.getMonth(); // 0 = Enero, 11 = Diciembre
 
-    const nombreMesAño = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(fechaActual);
+    const nombreMesAño = formatoMes.format(fechaActual);
 
     const totalDiasMes = new Date(año, mes + 1, 0).getDate();
     const primerDiaSemana = new Date(año, mes, 1).getDay(); // 0 = Domingo
@@ -45,87 +60,99 @@ export default function CalendarioMEI({ eventos, diaSeleccionado, onSeleccionar 
             className="w-full lg:w-4/12 flex flex-col"
         >
             <div className="mb-6 pb-4 border-b border-slate-200/80 ml-2">
-                <h3 className="font-serif font-bold text-2xl md:text-3xl text-[#1a2a4e] leading-tight">
+                <h3 className="font-serif font-bold text-2xl md:text-3xl text-mei-navy leading-tight">
                     Calendario
                 </h3>
-                <p className="font-sans text-xs md:text-sm text-[#E58B00] font-bold mt-1 uppercase tracking-wider">
-                    Selecciona un día
+                <p className="font-sans text-xs md:text-sm text-mei-orange-text font-bold mt-1 uppercase tracking-wider">
+                    Selecciona un día con eventos
                 </p>
             </div>
 
-            <div className="w-full bg-[#F3F6FA] rounded-2xl p-6 md:p-8 shadow-lg shadow-slate-200/50 text-[#1a2a4e] border border-slate-200/60 relative overflow-hidden">
+            <div className="w-full bg-[#F3F6FA] rounded-2xl p-6 md:p-8 shadow-lg shadow-slate-200/50 text-mei-navy border border-slate-200/60 relative overflow-hidden">
 
                 <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200/80">
-                    <h3 className="font-serif font-bold text-xl text-[#1a2a4e] capitalize">
+                    <p className="font-serif font-bold text-xl text-mei-navy capitalize" aria-live="polite">
                         {nombreMesAño}
-                    </h3>
+                    </p>
                     <div className="flex items-center gap-1">
                         <button
+                            type="button"
                             onClick={irMesAnterior}
-                            title="Mes anterior"
-                            className="p-1.5 rounded-lg border border-slate-300/70 text-slate-500 hover:bg-white hover:text-[#1a2a4e] hover:shadow-sm transition cursor-pointer"
+                            aria-label="Mes anterior"
+                            className="p-2 rounded-lg border border-slate-400/70 text-slate-600 hover:bg-white hover:text-mei-navy hover:shadow-sm transition cursor-pointer"
                         >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+                            <ChevronLeft size={18} aria-hidden="true" />
                         </button>
                         <button
+                            type="button"
                             onClick={irMesSiguiente}
-                            title="Mes siguiente"
-                            className="p-1.5 rounded-lg border border-slate-300/70 text-slate-500 hover:bg-white hover:text-[#1a2a4e] hover:shadow-sm transition cursor-pointer"
+                            aria-label="Mes siguiente"
+                            className="p-2 rounded-lg border border-slate-400/70 text-slate-600 hover:bg-white hover:text-mei-navy hover:shadow-sm transition cursor-pointer"
                         >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                            <ChevronRight size={18} aria-hidden="true" />
                         </button>
                     </div>
                 </div>
 
                 {/* dias de la semana */}
-                <div className="grid grid-cols-7 gap-1 mb-2 text-center font-sans font-bold text-xs text-slate-400 uppercase tracking-wider">
-                    <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
+                <div className="grid grid-cols-7 gap-1 mb-2 text-center font-sans font-bold text-xs text-slate-600 uppercase tracking-wider">
+                    {DIAS_SEMANA.map((d) => (
+                        <abbr key={d.largo} title={d.largo} className="no-underline">
+                            {d.corto}
+                        </abbr>
+                    ))}
                 </div>
 
                 {/* grid numerico */}
                 <div className="grid grid-cols-7 gap-1.5 mb-6">
                     {diasVaciosInicio.map((_, i) => (
-                        <div key={`vacio-${i}`} className="aspect-square" />
+                        <div key={`vacio-${i}`} className="aspect-square" aria-hidden="true" />
                     ))}
 
                     {diasDelMes.map((dia) => {
                         const clave = `${año}-${String(mes + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
-                        const tieneEvento = !!eventos[clave];
+                        const cantidad = eventos[clave]?.length ?? 0;
+                        const tieneEvento = cantidad > 0;
                         const esSeleccionado = diaSeleccionado === clave;
                         const esHoy = esMesActual && dia === diaDeHoy;
 
+                        const etiqueta = [
+                            formatoFechaLarga.format(new Date(año, mes, dia)),
+                            esHoy ? 'hoy' : '',
+                            tieneEvento ? (cantidad === 1 ? '1 evento' : `${cantidad} eventos`) : 'sin eventos',
+                        ].filter(Boolean).join(', ');
+
                         return (
                             <button
+                                type="button"
                                 key={dia}
                                 onClick={() => tieneEvento && onSeleccionar(clave)}
                                 disabled={!tieneEvento}
+                                aria-label={etiqueta}
+                                aria-pressed={tieneEvento ? esSeleccionado : undefined}
+                                aria-current={esHoy ? 'date' : undefined}
                                 className={`relative aspect-square rounded-xl flex items-center justify-center font-sans text-sm transition-all duration-200 ${esSeleccionado
-                                    ? 'bg-[#E58B00] text-white shadow-md shadow-[#E58B00]/30 font-bold scale-105 z-10'
+                                    ? 'bg-mei-orange-text text-white shadow-md shadow-mei-orange/30 font-bold scale-105 z-10'
                                     : tieneEvento
-                                        ? 'bg-white text-[#1a2a4e] font-bold hover:bg-slate-50 cursor-pointer shadow-sm border border-slate-200/60'
-                                        : 'text-slate-400 hover:bg-slate-200/50 cursor-default'
+                                        ? 'bg-white text-mei-navy font-bold hover:bg-slate-50 cursor-pointer shadow-sm border-2 border-mei-orange/70 underline decoration-2 underline-offset-4 decoration-mei-orange'
+                                        : 'text-slate-500 cursor-default'
                                     } ${esHoy && !esSeleccionado ? 'ring-2 ring-[#0047FF] font-bold text-[#0047FF]' : ''
                                     }`}
                             >
                                 {dia}
-                                {tieneEvento && !esSeleccionado && (
-                                    <span className="absolute bottom-1 w-1 h-1 rounded-full bg-[#E58B00]" />
-                                )}
                             </button>
                         );
                     })}
                 </div>
 
-                <div className="flex flex-col gap-2 pt-4 border-t border-slate-200/80 text-xs text-slate-500 font-sans">
+                <div className="flex flex-col gap-2 pt-4 border-t border-slate-200/80 text-xs text-slate-600 font-sans" aria-hidden="true">
                     <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded bg-white inline-block border border-slate-300 shadow-2xs relative flex items-center justify-center">
-                            <span className="w-1 h-1 rounded-full bg-[#E58B00]" />
-                        </span>
-                        <span>Días con eventos programados</span>
+                        <span className="w-4 h-4 rounded bg-white inline-flex items-center justify-center border-2 border-mei-orange/70 text-[9px] font-bold underline decoration-mei-orange">1</span>
+                        <span>Días con eventos programados (subrayados)</span>
                     </div>
                     {esMesActual && (
                         <div className="flex items-center gap-2">
-                            <span className="w-3 h-3 rounded inline-block ring-2 ring-[#0047FF]" />
+                            <span className="w-4 h-4 rounded inline-block ring-2 ring-[#0047FF]" />
                             <span>Día actual</span>
                         </div>
                     )}
