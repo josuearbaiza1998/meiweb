@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import congre from '../../assets/images/congregacion.jpg'
+import { Link } from 'react-router-dom';
+import congre from '../../assets/images/congregacion.webp'
 
 const fadeUpVariant = {
     hidden: { opacity: 0, y: 40 },
@@ -11,9 +12,10 @@ export default function NosotrosSection() {
         <section
             className="relative w-full py-20 lg:py-32 px-6 md:px-12 bg-[#FCFBFA] overflow-hidden"
             id="nosotros"
+            aria-labelledby="nosotros-titulo"
         >
             {/* Elemento decorativo de fondo */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-[#E58B00]/10 rounded-full blur-3xl pointer-events-none" />
+            <div aria-hidden="true" className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-mei-orange/10 rounded-full blur-3xl pointer-events-none" />
 
             <motion.div
                 className="relative max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-16 text-left"
@@ -24,36 +26,37 @@ export default function NosotrosSection() {
             >
 
                 <motion.div variants={fadeUpVariant} className="w-full lg:w-1/2 relative group">
-                    <div className="absolute -inset-3 bg-gradient-to-tr from-[#1a2a4e] to-[#0047FF] rounded-3xl opacity-10 blur-lg transition duration-500 group-hover:opacity-20" />
+                    <div aria-hidden="true" className="absolute -inset-3 bg-gradient-to-tr from-mei-navy to-[#0047FF] rounded-3xl opacity-10 blur-lg transition duration-500 group-hover:opacity-20" />
 
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#1a2a4e]/15 aspect-[4/3] w-full bg-slate-100">
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-mei-navy/15 aspect-[4/3] w-full bg-slate-100">
                         <img
                             src={congre}
                             alt="Congregación MEI adorando en servicio"
+                            loading="lazy"
                             className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
                         />
                     </div>
                 </motion.div>
 
                 <motion.div variants={fadeUpVariant} className="w-full lg:w-1/2 flex flex-col items-start">
-                    <span className="font-sans font-bold text-xs md:text-sm tracking-widest uppercase text-[#E58B00] mb-2">
+                    <span className="font-sans font-bold text-xs md:text-sm tracking-widest uppercase text-mei-orange-text mb-2">
                         Conoce nuestra misión
                     </span>
 
-                    <h2 className="font-serif font-bold text-4xl sm:text-4xl lg:text-5xl text-[#1a2a4e] leading-tight mb-6">
+                    <h2 id="nosotros-titulo" className="font-serif font-bold text-4xl sm:text-4xl lg:text-5xl text-mei-navy leading-tight mb-6">
                         Nuestra Identidad
                     </h2>
 
-                    <p className="font-sans text-base md:text-lg text-[#1a2a4e]/80 leading-relaxed mb-8">
+                    <p className="font-sans text-base md:text-lg text-mei-navy/80 leading-relaxed mb-8">
                         Crear el ambiente propicio en donde cada miembro crezca en su amor y pasión por Dios y compasión por las almas, de tal manera que lleguen a obedecer la gran comisión de Jesucristo y alcanzar a los Perdidos, con el fin de enseñarles y desarrollar en ellos los dones y ministerios dados por el Padre, el Hijo y el Espíritu Santo.
                     </p>
 
-                    <a
-                        href="#historia"
-                        className="inline-flex items-center justify-center rounded-full bg-[#E58B00] px-8 py-4 text-sm md:text-base font-bold text-white shadow-lg shadow-[#E58B00]/20 transition-all duration-300 hover:bg-[#ff9d00] hover:-translate-y-1 hover:shadow-xl hover:shadow-[#E58B00]/30"
+                    <Link
+                        to="/acerca-de"
+                        className="inline-flex items-center justify-center rounded-full bg-mei-orange-text px-8 py-4 text-sm md:text-base font-bold text-white shadow-lg shadow-mei-orange/20 transition-all duration-300 hover:bg-mei-orange-dark hover:-translate-y-1 hover:shadow-xl hover:shadow-mei-orange/30"
                     >
                         Conoce Nuestra Historia
-                    </a>
+                    </Link>
                 </motion.div>
 
             </motion.div>
