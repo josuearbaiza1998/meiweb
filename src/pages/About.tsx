@@ -50,8 +50,8 @@ function About() {
                                 Palabra y celebrar juntos la presencia de Dios.
                             </p>
                             <p>
-                                Bajo el liderazgo de los pastores Ángel Emilio Ortez y Mirian de Ortez, la congregación aprendió
-                                a vivir por fe y a soñar en grande. De ese llamado nació una iglesia que no solo se reúne dentro
+                                Bajo el liderazgo de los pastores Ángel Emilio Ortez Andrade, Josué Neris Parada y Joaquín
+                                Arquímedes Campos, la congregación aprendió a vivir por fe y a soñar en grande. De ese llamado nació una iglesia que no solo se reúne dentro
                                 de cuatro paredes: con el tiempo, la Palabra comenzó a llegar a los hogares por medio de la
                                 radio y la televisión, alcanzando a familias de toda la región.
                             </p>
