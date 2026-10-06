@@ -3,11 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
 import mei from '../../assets/images/mei.webp'
 
+// En el mismo orden en que aparecen las secciones de la página
 const ENLACES = [
     { texto: 'Inicio', to: '/' },
     { texto: 'Servicios', to: '/#servicios' },
-    { texto: 'Ministerios', to: '/#ministerios' },
     { texto: 'Agenda', to: '/#agenda' },
+    { texto: 'Ministerios', to: '/#ministerios' },
     { texto: 'Oración', to: '/#oracion' },
     { texto: 'Contacto', to: '/#contacto' },
     { texto: 'Acerca de', to: '/acerca-de' },
