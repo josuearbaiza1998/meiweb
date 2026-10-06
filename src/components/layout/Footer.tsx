@@ -6,8 +6,8 @@ import RedesSociales from '../ui/RedesSociales';
 
 const ENLACES = [
     { texto: 'Servicios', to: '/#servicios' },
-    { texto: 'Ministerios', to: '/#ministerios' },
     { texto: 'Agenda de eventos', to: '/#agenda' },
+    { texto: 'Ministerios', to: '/#ministerios' },
     { texto: 'Peticiones de oración', to: '/#oracion' },
     { texto: 'Contacto', to: '/#contacto' },
     { texto: 'Nuestra historia', to: '/acerca-de' },
