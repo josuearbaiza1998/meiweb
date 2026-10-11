@@ -38,7 +38,7 @@ export const MINISTERIOS: Ministerio[] = [
         lema: 'La Palabra en cada hogar',
         descripcion:
             'A través de la radio llevamos alabanza, enseñanza y mensajes de esperanza a hogares de la zona oriental y a quienes no pueden asistir al templo.',
-        detalles: ['Radio Emanuel 103.7 FM', 'Indicativo YSHC', 'Programas de enseñanza y alabanza'],
+        detalles: ['Radio Adoración FM 103.7', 'Indicativo YSHC', 'Programas de enseñanza y alabanza'],
     },
     {
         id: 'canal',
