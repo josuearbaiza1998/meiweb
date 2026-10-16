@@ -53,7 +53,7 @@ export default function ContactoSection() {
                                 <a
                                     href={href}
                                     {...(externo ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                                    className="flex items-start gap-4 rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-mei-orange/50"
+                                    className="flex items-center gap-4 rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-mei-orange/50"
                                 >
                                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mei-orange/10 text-mei-orange-text">
                                         <Icono size={24} aria-hidden="true" />
