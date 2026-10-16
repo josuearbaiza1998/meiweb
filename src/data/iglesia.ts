@@ -7,7 +7,7 @@ export const IGLESIA = {
     nombre: 'Ministerios Emanuel Internacional',
     nombreCorto: 'MEI',
     templo: 'TaberMEI Central',
-    direccion: 'Boulevard Emanuel, Barrio El Calvario',
+    direccion: 'Final calle Pastor Angel Emilio Ortez, Colonia Monte Sinaí',
     ciudad: 'Santa Rosa de Lima, La Unión, El Salvador',
     telefono: '+503 2665-5700',
     telefonoHref: 'tel:+50326655700',
